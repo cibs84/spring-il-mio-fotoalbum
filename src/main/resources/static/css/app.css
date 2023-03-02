@@ -1,0 +1,40 @@
+/*
+****************************************************************************************
+START SASS COMPILER
+INSERIRE NEL TERMINALE IL SEGUENTE COMANDO:
+sass --watch src/main/resources/sass/app.scss:src/main/resources/static/css/app.css
+****************************************************************************************
+*/
+/* Variables */
+/* Commons */
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* COMMONS */
+.ms_container {
+  width: 50%;
+  margin: 0 auto;
+  background: lightgreen;
+}
+
+/* PARTIALS */
+/* HEADER */
+header {
+  padding: 2rem 0;
+  /* 	background: lightblue; */
+  background: #6574cd;
+}
+
+/* PARTIALS - Photos */
+table img {
+  width: 10rem;
+}
+table .td-actions {
+  min-width: 10rem;
+}
+
+/*# sourceMappingURL=app.css.map */

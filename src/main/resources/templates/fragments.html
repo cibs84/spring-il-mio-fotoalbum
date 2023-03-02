@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Fragments</title>
+</head>
+<body>
+	<!-- HEAD -->
+	<th:block th:fragment="head">
+		<!-- Meta Required -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" th:href="@{/webjars/font-awesome/6.3.0/css/all.min.css}">
+		<!-- Style CSS -->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
+	</th:block>
+	
+	<!-- Header -->
+	<header class="container" th:fragment="header">
+		<div class="row justify-content-end">
+			<div class="col-auto">
+				<div class="header-right fs-4 py-3">
+					<span class="fs-4" sec:authentication="name"></span> 
+					<span sec:authentication="principal.authorities"></span> |  
+					<a href="/logout">Esci</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<!-- Bootstrap Javascript -->
+	<div th:fragment="scripts">
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+	</div>
+</body>
+</html>
