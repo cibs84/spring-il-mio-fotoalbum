@@ -2,7 +2,7 @@
 ****************************************************************************************
 START SASS COMPILER
 INSERIRE NEL TERMINALE IL SEGUENTE COMANDO:
-sass --watch src/main/resources/sass/app.scss:src/main/resources/static/css/app.css
+sass --watch src/main/resources/sass/admin/app.scss:src/main/resources/static/css/admin/app.css
 ****************************************************************************************
 */
 /* Variables */
@@ -35,6 +35,21 @@ table img {
 }
 table .td-actions {
   min-width: 10rem;
+}
+
+input {
+  margin-bottom: 1.2rem;
+}
+input[type=checkbox] {
+  margin-bottom: unset;
+}
+
+.btn-insert {
+  margin-top: 1.2rem;
+}
+
+h4 {
+  margin-top: 1.5rem;
 }
 
 /*# sourceMappingURL=app.css.map */

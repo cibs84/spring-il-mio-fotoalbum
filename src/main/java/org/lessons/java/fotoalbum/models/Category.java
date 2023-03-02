@@ -49,6 +49,11 @@ public class Category {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Photo> photos;
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -17,11 +17,11 @@
 			Go to Photos &nbsp;<i class="fa fa-right-from-bracket"></i>
 		</a>
 		<!-- Edit -->
-		<a th:href="@{/photos/edit/{id} (id=${photo.id})}" class="btn btn-outline-success">
+		<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" class="btn btn-outline-success">
    			Edit <i class="fa-regular fa-pen-to-square"></i>
    		</a>
    		<!-- Delete -->
-      	<form action="#" th:action="@{/photos/delete/{id}(id=${photo.id})}" method="post" 
+      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" method="post" 
       		  class="d-inline-block">
       		<button type="submit" id="submitButton" class="btn btn-outline-danger">
       			Delete <i class="fa fa-trash-alt"></i>
@@ -36,7 +36,7 @@
 				<p>[[${photo.description}]]</p>
 			</div>
 			<div class="me-auto col-4">
-				<a th:href="@{|/categories/create?photoId=${photo.id}|}" 
+				<a th:href="@{|/admin/categories/create?photoId=${photo.id}|}" 
 				   class="my-3 d-inline-block btn btn-primary">
 					Insert a new Category
 				</a>
@@ -56,10 +56,10 @@
 					      <td>[[${category.id}]]</td>
 					      <td>[[${category.name}]]</td>
 					      <td>
-							<a th:href="@{/categories/edit/{id} (id=${category.id})}" class="btn btn-success">
+							<a th:href="@{/admin/categories/edit/{id} (id=${category.id})}" class="btn btn-success">
 				      			<i class="fa-regular fa-pen-to-square"></i>
 				      		</a>
-					      	<form th:action="@{/categories/delete/{id} (id=${category.id})}" method="post" class="d-inline-block">
+					      	<form th:action="@{/admin/categories/delete/{id} (id=${category.id})}" method="post" class="d-inline-block">
 					      		<button type="submit" id="submitButton" class="btn btn-danger">
 					      			<i class="fa fa-trash-alt"></i>
 					      		</button>

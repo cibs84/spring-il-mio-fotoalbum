@@ -34,7 +34,7 @@ public class Photo {
 	@NotNull(message = "Il campo Url deve essere compilato")
 	@NotEmpty(message = "Il campo Url deve essere compilato")
 	@Size(max = 400, message = "Inserire massimo 400 caratteri")
-	@Column(nullable=false, length=400, unique = true)
+	@Column(nullable=false, length=400)
 	private String url;
 	
 	@NotNull(message = "Il campo Tag deve essere compilato")

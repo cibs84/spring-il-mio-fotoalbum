@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert a new Photo</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<!-- <header th:replace="~{fragments :: header}"></header> -->
+	
+	<!-- MAIN -->
+	<main class="container">
+		<h1 class="mt-4">Insert a new Photo</h1>
+		
+		<!--  Form: Insert a new Photo -->
+		<form id="photo-form" th:object="${photo}" th:action="@{/admin/photos/store}" method="post">
+			<!--  Title -->
+	    	<label for="title" class="form-label">Title</label>
+	    	<input type="text" maxlength="30" th:field="*{title}" class="form-control" id="title" th:errorClass="is-invalid">
+			<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+				<ul>
+					<li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+				</ul>
+			</div>
+		  
+			<!--  Description -->
+	    	<label for="description" class="form-label">Description</label>
+	    	<input type="text" maxlength="300" th:field="*{description}" class="form-control" id="description" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  	
+		  	<!--  Tag -->
+	    	<label for="tag" class="form-label">Tag</label>
+	    	<input type="text" maxlength="100" th:field="*{tag}" class="form-control" id="tag" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('tag')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('tag')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  
+			<!--  Url -->
+	    	<label for="url" class="form-label">Url</label>
+	    	<input type="text" th:field="*{url}" maxlength="400" class="form-control" id="photo" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  	
+		  	<!-- Photo Visibility -->
+			<input type="checkbox" class="form-check-input" 
+						th:value="${photo.visible}" 
+						th:field="*{visible}" 
+						th:id="|photo_${photo.id}|">
+				<label class="form-check-label" 
+						th:for="|photo_${photo.id}|">Is Visible</label>
+		  	
+		  	<h4>Categories</h4>
+			<div th:each="category : ${categories}">
+				<input type="checkbox" class="form-check-input" th:value="${category.id}" 
+				th:field="${photo.categories}" th:id="|category_${category.id}|">
+				<label class="form-check-label" th:text="${category.name}" 
+					th:for="|category_${category.id}|"></label>
+			</div>
+		  	
+		  	<!-- Button Crea -->
+		  	<button type="submit" class="btn btn-primary btn-insert">Insert</button>
+		</form>
+	</main>
+
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>

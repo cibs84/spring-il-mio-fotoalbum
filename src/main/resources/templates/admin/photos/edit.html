@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Photo</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<!-- <header th:replace="~{fragments :: header}"></header> -->
+	
+	<!-- MAIN -->
+	<main class="container">
+	<!-- Heading -->
+		<div class="d-flex align-items-center">
+			<h1 class="mt-4 me-5">Edit Photo</h1>
+			
+			<!-- ACTIONS -->
+			<div class="mt-4 d-inline-block">
+				<!-- Go to Photos -->
+		  		<a class="btn btn-outline-success" th:href="@{/admin/photos}">
+		  			Go to Photos &nbsp;<i class="fa fa-right-from-bracket"></i>
+	  			</a>
+		  		<!-- Delete -->
+		      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" method="post" class="d-inline-block">
+		      		<button type="submit" id="submitButton" class="btn btn-outline-danger">
+		      			Delete <i class="fa fa-trash-alt"></i>
+		      		</button>
+		      	</form>
+	      	</div>
+		</div>
+		<!--  Form: Edit Photo -->
+		<form id="photo-form" th:object="${photo}" 
+			th:action="@{/admin/photos/update/{id} (id=${photo.id})}" method="post">
+			<!--  Title -->
+	    	<label for="title" class="form-label">Title</label>
+	    	<input type="text" maxlength="30" th:field="*{title}" class="form-control" id="title" th:errorClass="is-invalid">
+			<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+				<ul>
+					<li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+				</ul>
+			</div>
+		  
+			<!--  Description -->
+	    	<label for="description" class="form-label">Description</label>
+	    	<input type="text" maxlength="300" th:field="*{description}" class="form-control" id="description" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  
+			<!--  Tag -->
+	    	<label for="tag" class="form-label">Tag</label>
+	    	<input type="text" maxlength="100" th:field="*{tag}" class="form-control" id="tag" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('tag')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('tag')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  
+			<!--  Url -->
+	    	<label for="url" class="form-label">Url</label>
+	    	<input type="text" th:field="*{url}" maxlength="400" class="form-control" id="url" th:errorClass="is-invalid">
+		  	<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
+		  		<ul>
+		  			<li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+		  		</ul>
+		  	</div>
+		  	
+		  	<!-- Photo Visibility -->
+			<input type="checkbox" class="form-check-input" 
+						th:value="${photo.visible}" 
+						th:field="*{visible}"
+						th:checked="${photo.visible}" 
+						th:id="|photo_${photo.id}|">
+				<label class="form-check-label" 
+						th:for="|photo_${photo.id}|">Is Visible</label>
+		  	
+		  	<h4 class="mt-4">Categories</h4>
+			<div th:each="category : ${categories}" class="form-check">
+				<input type="checkbox" class="form-check-input" 
+						th:value="${category.id}" 
+						th:field="*{categories}"
+						th:checked="${photo.categories.contains(category)}" 
+						th:id="|category_${category.id}|">
+				<label class="form-check-label" th:text="${category.name}" 
+						th:for="|category_${category.id}|"></label>
+			</div>
+			
+	  		<!-- Salva -->
+	  		<button type="submit" class="btn btn-primary mt-4 d-inline-block">Salva</button>
+		</form>
+		
+		
+	</main>
+
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>
