@@ -1,0 +1,79 @@
+/*
+****************************************************************************************
+START SASS COMPILER
+INSERIRE NEL TERMINALE IL SEGUENTE COMANDO:
+sass --watch src/main/resources/sass/guest/app.scss:src/main/resources/static/css/guest/app.css
+****************************************************************************************
+*/
+/* Variables */
+/* Commons */
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: green;
+}
+
+/* COMMONS */
+.ms_container {
+  width: 50%;
+  margin: 0 auto;
+  background: lightgreen;
+}
+
+body {
+  background: #fafafa;
+}
+
+/* PARTIALS */
+/* HEADER */
+header {
+  padding: 2rem 0;
+  /* 	background: lightblue; */
+  background: #6574cd;
+}
+
+/* PARTIALS - Photos */
+table img {
+  width: 10rem;
+}
+table .td-actions {
+  min-width: 10rem;
+}
+
+/* PARTIALS - Photos !!!!!!!!!!!!!!!!!! */
+* {
+  color: red !important;
+}
+
+.authorComment {
+  color: #3c3c3c;
+  font-size: 14px;
+  font-weight: bold;
+  color: red;
+}
+
+.contentComment {
+  color: #484848;
+  font-size: 15px;
+  line-height: 22px;
+  color: red;
+}
+
+input {
+  margin-bottom: 1.2rem;
+}
+input[type=checkbox] {
+  margin-bottom: unset;
+}
+
+.btn-insert {
+  margin-top: 1.2rem;
+}
+
+h4 {
+  margin-top: 1.5rem;
+}
+
+/*# sourceMappingURL=app.css.map */

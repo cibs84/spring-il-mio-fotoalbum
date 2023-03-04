@@ -1,0 +1,23 @@
+/*
+****************************************************************************************
+START SASS COMPILER
+INSERIRE NEL TERMINALE IL SEGUENTE COMANDO:
+sass --watch src/main/resources/sass/guest/app.scss:src/main/resources/static/css/guest/app.css
+****************************************************************************************
+*/
+
+/* Variables */
+@import 'variables';
+
+/* Commons */
+@import 'commons';
+
+/* PARTIALS */
+@import 'partials/header';
+@import 'partials/footer';
+
+/* PARTIALS - Photos */
+@import 'partials/photos/index';
+@import 'partials/photos/show';
+@import 'partials/photos/create';
+@import 'partials/photos/edit';

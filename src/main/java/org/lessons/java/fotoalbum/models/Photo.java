@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -50,6 +51,7 @@ public class Photo {
 	private List<Category> categories;
 	
 	@OneToMany(mappedBy = "photo")
+	@OrderBy("id DESC")
 	private List<Comment> comments;
 
 	public Long getId() {

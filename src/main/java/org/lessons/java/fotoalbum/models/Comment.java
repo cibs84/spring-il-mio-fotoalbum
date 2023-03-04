@@ -1,5 +1,7 @@
 package org.lessons.java.fotoalbum.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,7 @@ public class Comment {
 	@Column(nullable=false, length=400)
 	private String content;
 	
+	@JsonBackReference
 	@ManyToOne
 	private Photo photo;
 

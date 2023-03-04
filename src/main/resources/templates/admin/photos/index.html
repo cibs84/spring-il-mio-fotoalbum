@@ -29,9 +29,9 @@
 			</div>
 			
 			<!-- Go to Categories -->
-			<div class="col-auto ms-auto" sec:authorize="hasAuthority('ADMIN')">
-				<a href="/admin/categories" 
-					   class="d-inline-block btn btn-primary">
+			<div class="col-auto ms-auto">
+				<a href="/admin/categories" class="d-inline-block btn btn-primary"
+				   sec:authorize="hasAuthority('ADMIN')">
 					Go to Categories
 				</a>
 			</div>
@@ -43,25 +43,25 @@
 		<table th:if="${photos.size() > 0}" class="table table-hover align-middle w-auto">
 			<thead>
 			    <tr>
-			      <th scope="col">#</th>
+			      <th scope="col" sec:authorize="hasAuthority('ADMIN')">#</th>
 			      <th scope="col">Title</th>
 			      <th scope="col">Description</th>
 			      <th scope="col">Tag</th>
 			      <th scope="col">Categories</th>
 			      <th scope="col">Photo</th>
-			      <th scope="col">Actions</th>
+			      <th scope="col" sec:authorize="hasAuthority('ADMIN')">Actions</th>
 			    </tr>
 	  		</thead>
 		  	<tbody>
 			    <tr th:each="photo : ${photos}" th:onclick="|window.location='/admin/photos/${photo.id}';|" style="cursor:pointer;">
-			      <th>[[${photo.id}]]</th>
+			      <th sec:authorize="hasAuthority('ADMIN')">[[${photo.id}]]</th>
 			      <td>[[${photo.title}]]</td>
 			      <td>[[${photo.description}]]</td>
 			      <td>[[${photo.tag}]]</td>
 			      <td>[[${photo.categories}]]</td>
 			      <td><img th:src="@{${photo.url}}" width="100"></td>
 			      <!-- Actions -->
-			      <td class="td-actions">
+			      <td class="td-actions" sec:authorize="hasAuthority('ADMIN')">
 			      	<!-- Show -->
 					<a th:href="@{/admin/photos/{id} (id=${photo.id})}" class="btn btn-primary">
 		      			<i class="fa-solid fa-sheet-plastic"></i>

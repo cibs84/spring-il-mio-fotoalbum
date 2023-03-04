@@ -1,0 +1,13 @@
+input {
+	margin-bottom: 1.2rem;
+	
+	&[type="checkbox"] {
+		margin-bottom: unset;
+	}
+}
+.btn-insert {
+	margin-top: 1.2rem;
+}
+h4 {
+	margin-top: 1.5rem;
+}

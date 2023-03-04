@@ -12,17 +12,18 @@
 	
 	<!-- MAIN -->
 	<main class="container">
-		<!-- Torna alla Home -->
+		<!-- Go to Photos -->
 		<a th:href="@{/}" class="my-3 d-inline-block btn btn-outline-primary">
 			Go to Photos &nbsp;<i class="fa fa-right-from-bracket"></i>
 		</a>
 		<!-- Edit -->
-		<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" class="btn btn-outline-success">
+		<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" class="btn btn-outline-success"
+		   sec:authorize="hasAuthority('ADMIN')">
    			Edit <i class="fa-regular fa-pen-to-square"></i>
    		</a>
    		<!-- Delete -->
       	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" method="post" 
-      		  class="d-inline-block">
+      		  sec:authorize="hasAuthority('ADMIN')" class="d-inline-block">
       		<button type="submit" id="submitButton" class="btn btn-outline-danger">
       			Delete <i class="fa fa-trash-alt"></i>
       		</button>
@@ -36,13 +37,8 @@
 				<p>[[${photo.description}]]</p>
 			</div>
 			<div class="me-auto col-4">
-				<a th:href="@{|/admin/categories/create?photoId=${photo.id}|}" 
-				   class="my-3 d-inline-block btn btn-primary">
-					Insert a new Category
-				</a>
-			
-				<h4>Categorie</h4>
-				<div th:if="${photo.categories.size()<=0}" class="mb-5">Non ci sono categorie</div>
+				<h4 class="mt-0">Categories</h4>
+				<div th:if="${photo.categories.size()<=0}" class="mb-5">Categories not found</div>
 				<table th:if="${photo.categories.size()>0}" class="table table-hover align-middle">
 					<thead>
 					    <tr>
@@ -55,11 +51,13 @@
 					    <tr th:each="category : ${photo.categories}">
 					      <td>[[${category.id}]]</td>
 					      <td>[[${category.name}]]</td>
-					      <td>
-							<a th:href="@{/admin/categories/edit/{id} (id=${category.id})}" class="btn btn-success">
+					      <td sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/admin/categories/edit/{id} (id=${category.id})}" 
+							   class="btn btn-success">
 				      			<i class="fa-regular fa-pen-to-square"></i>
 				      		</a>
-					      	<form th:action="@{/admin/categories/delete/{id} (id=${category.id})}" method="post" class="d-inline-block">
+					      	<form th:action="@{/admin/categories/delete/{id} (id=${category.id})}" 
+					      		  method="post" class="d-inline-block">
 					      		<button type="submit" id="submitButton" class="btn btn-danger">
 					      			<i class="fa fa-trash-alt"></i>
 					      		</button>

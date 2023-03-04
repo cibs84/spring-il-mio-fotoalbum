@@ -1,3 +1,4 @@
+/*
 package org.lessons.java.fotoalbum.security;
 
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,12 @@ public class SecurityConfiguration {
 	    	.and().exceptionHandling()
 	    	.accessDeniedPage("/access-denied.html"); //pagina personalizzata in caso di accesso negato
 		
+		http.authorizeHttpRequests()
+		.requestMatchers(HttpMethod.POST, "/api/photos/create").permitAll()	//chiunque può accedere alla Home
+		.requestMatchers("/**").permitAll()	//chiunque può accedere alla Home
+		.and().exceptionHandling()
+		.accessDeniedPage("/access-denied.html"); //pagina personalizzata in caso di accesso negato
+		
 		return http.build();	
 	}
 	
@@ -55,3 +62,4 @@ public class SecurityConfiguration {
 	    return authProvider;
 	}  
 }
+*/

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/admin/app.css">
+</head>
+<body>
+	<!-- HEADER -->
+	
+	
+	<!-- MAIN -->
+	<main class="container">
+		<h1 class="text-center mb-5">Photos</h1>
+		
+		<!-- Search by name -->
+		<form action="photos" class="row my-5">
+			<div class="col-auto px-0">
+				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Name">
+			</div>
+			<div class="col-auto px-2">
+				<button type="submit" class="btn btn-primary col-auto">Search</button>
+			</div>
+		</form>
+		
+		<!-- IF No photos available -->
+		<h2 id="no_photos" class="text-center my-5">No photos available</h2>
+		<!-- ELSE: Photo List -->
+		<table id="photos" class="table table-hover align-middle w-auto">
+			<thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Title</th>
+			      <th scope="col">Description</th>
+			      <th scope="col">Tag</th>
+			      <th scope="col">Categories</th>
+			      <th scope="col">Photo</th>
+			    </tr>
+	  		</thead>
+		  	<tbody id="photos_table">
+			    <!-- Ciclo in guest/index.js -->
+		  	</tbody>
+		</table>
+	</main>
+	
+	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./scripts/photo/index.js"></script>
+</body>
+</html>
+

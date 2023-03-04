@@ -11,10 +11,10 @@
 		<h1 class="text-center my-5">Categories</h1>
 		
 		
-		<!-- SE non ci sono pizze nel db -->
+		<!-- IF the Categories are not found -->
 		<h2 class="text-center my-5" th:unless="${categories.size() > 0}">Categories not found</h2>
 		
-		<!-- Inserisci una nuova pizza -->
+		<!-- Insert a new Category -->
 		<div class="col-auto px-2">
 			<a href="categories/create" class="btn btn-primary col-auto mb-3">Insert a new Category</a>
 		</div>

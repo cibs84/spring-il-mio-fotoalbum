@@ -1,3 +1,4 @@
+/*
 package org.lessons.java.fotoalbum.security;
 
 import java.util.Collection;
@@ -12,9 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class DatabaseUserDetails implements UserDetails {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final User user;
@@ -65,3 +63,4 @@ public class DatabaseUserDetails implements UserDetails {
 		return true;
 	}
 }
+*/

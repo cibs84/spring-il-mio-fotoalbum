@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Detail</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/admin/app.css">
+</head>
+<body>
+	<main class="container">
+		
+		<h1 id="photoTitle" class="text-center my-5"></h1>
+		<div class="row gx-5">
+			<div class="ms-auto col-6">
+				<img id="photoUrl" class="mb-3" width="100%">
+		 		<span class="fw-semibold text-decoration-underline d-inline-block">Tag: </span><span id="photoTag" class="px-2"></span> | <span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span><span id="photoCategories"></span>
+				<h4>Description</h4>
+				<p id="photoDescription"></p>
+			</div>
+			<div class="me-auto col-4">
+				<h4 class="mb-3 mt-0">Leave a comment</h4>
+				<form class="formComment" onsubmit="event.preventDefault(); addComment(photoId)">
+					<!-- Input Hidden: photoId -->
+					<input type="hidden" id="photoId">
+					
+					<!-- Error List -->
+					<div class="text-danger">
+						<ul id="validation_errors"></ul>
+					</div>
+					
+	            	<!-- Author -->
+		            <label for="authorComment" class="form-label">Your Name</label>
+		            <input type="text" class="form-control" id="authorComment">
+		            <!-- Validation Error -->
+				  	<div class="text-danger">
+						<ul id="author_err"></ul>
+					</div>
+					
+		            <!-- Content -->
+					<label for="contentComment">Comment</label>
+		            <textarea class="form-control" id="contentComment"
+		            		  placeholder="Leave a comment here"></textarea>
+		            <!-- Validation Error -->
+				  	<div class="text-danger">
+						<ul id="content_err">
+							
+						</ul>
+					</div>
+		            
+		            <!-- Submit -->
+		            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+	            </form>
+				
+				<!-- Comment List -->
+				<h4 class="mt-5">Comment List</h4>
+				<div id="no_comments">Comments not found</div>
+				<div id="commentList" class="row">
+					<!-- Loop in guest/show.js -->
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/photo/show.js"></script>
+</body>
+</html>

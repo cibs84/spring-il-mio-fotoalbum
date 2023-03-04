@@ -1,4 +1,4 @@
-package org.lessons.java.fotoalbum.controllers;
+package org.lessons.java.fotoalbum.controllers.admin;
 
 import java.util.List;
 import java.util.Optional;
