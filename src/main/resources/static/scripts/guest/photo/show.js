@@ -74,7 +74,7 @@ function showComments(id) {
 		        <div class="col-auto">
 			        <div class="card mb-4">
 					  <div class="card-body">
-					    <div class="authorComment">${comment.author}</div>
+					    <div class="authorComment fw-bold">${comment.author}</div>
 					    <p class="contentComment">${comment.content}</p>
 					  </div>
 					</div>
