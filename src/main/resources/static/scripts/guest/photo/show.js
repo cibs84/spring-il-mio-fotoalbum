@@ -71,7 +71,7 @@ function showComments(id) {
 		    photo.comments.forEach(comment => {
 		        console.log(comment);
 		        document.querySelector('#commentList').innerHTML += `
-		        <div class="col-auto">
+		        <div>
 			        <div class="card mb-4">
 					  <div class="card-body">
 					    <div class="authorComment fw-bold">${comment.author}</div>
@@ -103,15 +103,19 @@ function addComment(photoId) {
 			console.log("Insert Comment OK: ", res);
 			resetValidationErrors();
 			
+			// Reset comment form fields
 			document.querySelector('#authorComment').value = '';
 			document.querySelector('#contentComment').value = '';
 			
 			showComments(id);
+			
+			// Scroll show.html to comment list
+			const commentList = document.querySelector("#commentList");
+			commentList.scrollIntoView();
 		})
 		.catch(res => {
 			console.error("Insert Comment ERROR: ", res);
 			showValidationErrors(res.response.data.errors);
-			alert("Insert Comment ERROR");
 		})
 		
 }

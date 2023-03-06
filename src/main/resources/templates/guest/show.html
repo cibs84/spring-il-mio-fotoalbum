@@ -37,14 +37,15 @@
 	<main class="container">
 		
 		<h1 id="photoTitle" class="text-center my-5"></h1>
-		<div class="row gx-5">
-			<div class="ms-auto col-6">
+		<div class="row justify-content-between">
+			<div class="ms-auto col-8">
+				<!-- Photo -->
 				<img id="photoUrl" class="mb-3" width="100%">
+		 		
+		 		<!-- Tag and Categories -->
 		 		<span class="fw-semibold text-decoration-underline d-inline-block">Tag: </span><span id="photoTag" class="px-2"></span> | <span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span><span id="photoCategories"></span>
-				<h4>Description</h4>
-				<p id="photoDescription"></p>
 			</div>
-			<div class="me-auto col-4">
+			<div class="col-4">
 				<h4 class="mb-3 mt-0">Leave a comment</h4>
 				<form class="formComment" onsubmit="event.preventDefault(); addComment(photoId)">
 					<!-- Input Hidden: photoId -->
@@ -75,13 +76,17 @@
 		            <!-- Submit -->
 		            <button type="submit" class="btn btn-dark mt-3">Submit</button>
 	            </form>
-				
-				<!-- Comment List -->
-				<h4 class="mt-5">Comment List</h4>
-				<div id="no_comments">Comments not found</div>
-				<div id="commentList" class="row">
-					<!-- Comment List generates in guest/photo/show.js -->
-				</div>
+			</div>
+			
+			<!-- Description -->
+			<h4 class="mt-5">Description</h4>
+			<p id="photoDescription"></p>
+			
+			<!-- Comment List -->
+			<h4 class="mt-4">Comment List</h4>
+			<div id="no_comments">Comments not found</div>
+			<div id="commentList" class="row">
+				<!-- Comment List generates in guest/photo/show.js -->
 			</div>
 		</div>
 	</main>
