@@ -1,7 +1,6 @@
 package org.lessons.java.fotoalbum.controllers.admin;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +92,8 @@ public class PhotoController {
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
+			List<Category> categories = categoryRepository.findAll();
+			model.addAttribute("categories", categories);
 			return "admin/photos/create";
 		}
 		
@@ -119,6 +120,8 @@ public class PhotoController {
 			Model model) {
 		
 		if (bindingResult.hasErrors()) {
+			List<Category> categories = categoryRepository.findAll();
+			model.addAttribute("categories", categories);
 			return "admin/photos/edit";
 		}
 		

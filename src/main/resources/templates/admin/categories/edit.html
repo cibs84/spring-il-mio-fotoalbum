@@ -7,6 +7,10 @@
 <th:block th:replace="~{fragments :: head}"></th:block>
 </head>
 <body>
+	<!-- HEADER -->
+	<header th:replace="~{fragments :: header('categoryEdit')}"></header>
+	
+	<!-- MAIN -->
 	<main class="container">
 		<h1 class="mt-4">Edit Category</h1>
 		
@@ -23,7 +27,7 @@
 			</div>
 		  	
 		  	<!-- Button Save -->
-		  	<button type="submit" class="btn btn-primary mt-3">Save</button>
+		  	<button type="submit" class="btn btn-dark mt-3">Save</button>
 		</form>
 	</main>
 

@@ -49,7 +49,7 @@ public class CategoryController {
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			return "admin/categories/edit";
+			return "admin/categories/create";
 		}
 		
 		categoryRepository.save(formCategory);
@@ -67,15 +67,13 @@ public class CategoryController {
 	
 	@PostMapping("/update/{id}")
 	public String update(
-//			@Valid @ModelAttribute Category formCategory,
-//			BindingResult bindingResult,
-//			Model model) {
-//		
-//		if (bindingResult.hasErrors()) {
-//			return "admin/categories/edit";
-//		}
-		@ModelAttribute Category formCategory,
-		Model model) {
+			@Valid @ModelAttribute Category formCategory,
+			BindingResult bindingResult,
+			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			return "admin/categories/edit";
+		}
 		
 		categoryRepository.save(formCategory);
 		

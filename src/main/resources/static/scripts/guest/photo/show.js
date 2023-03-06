@@ -8,6 +8,7 @@ console.log("photoId: ", photoId);
 showPhoto(photoId);
 showComments(photoId);
 
+
 //#############
 //  FUNCTIONS
 //#############
@@ -87,49 +88,6 @@ function showComments(id) {
         });
 }
 
-function populateHtml(photo) {
-    //  *** PHOTO ***
-    // Prepare category string to be displayed in html
-    let cats = '';
-    photo.categories.forEach(category => {
-    	cats += category.name + ', ';
-    });
-    cats = cats.slice(0, cats.length-2);
-                
-    document.querySelector('#photoId').innerHTML = photo.id;
-    document.querySelector('#photoTitle').innerHTML = photo.title;
-    document.querySelector('#photoTag').innerHTML = photo.tag;
-    document.querySelector('#photoCategories').innerHTML = cats;
-    document.querySelector('#photoDescription').innerHTML = photo.description;
-
-    document.querySelector('#photoUrl').src = photo.url;
-    document.querySelector('#photoUrl').alt = photo.title;
-
-    // *** COMMENTS ***
-    // IF Comments not found
-    console.log("photo.comments: ", photo.comments);
-    if (photo.comments.length > 0) {
-        document.querySelector('#no_comments').classList.add("d-none");
-    } else {
-        document.querySelector('#commentList').classList.add("d-none");
-    }
-    
-    document.querySelector('#commentList').innerHTML = '';
-    photo.comments.forEach(comment => {
-        console.log(comment);
-        document.querySelector('#commentList').innerHTML += `
-        <div class="col-auto">
-	        <div class="card mb-4">
-			  <div class="card-body">
-			    <div class="authorComment">${comment.author}</div>
-			    <p class="contentComment">${comment.content}</p>
-			  </div>
-			</div>
-        </div>
-        ` 
-    });
-}
-
 function addComment(photoId) {
 	const id = photoId.innerText;
 	console.log("photoId: ", id);
@@ -144,6 +102,10 @@ function addComment(photoId) {
 		.then(res => {
 			console.log("Insert Comment OK: ", res);
 			resetValidationErrors();
+			
+			document.querySelector('#authorComment').value = '';
+			document.querySelector('#contentComment').value = '';
+			
 			showComments(id);
 		})
 		.catch(res => {
