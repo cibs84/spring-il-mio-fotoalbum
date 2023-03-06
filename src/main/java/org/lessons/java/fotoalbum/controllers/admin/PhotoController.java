@@ -1,5 +1,7 @@
 package org.lessons.java.fotoalbum.controllers.admin;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,16 @@ public class PhotoController {
 			photoList = photoRepository.findAll();
 		}
 		
+		// Create a tagSet for tagSelect in view
+		List<Photo> photoList2 = photoRepository.findAll();
+		HashSet<String> tagSet = new HashSet<String>();
+		
+		for (Photo photo : photoList2) {
+			tagSet.add(photo.getTag());
+		}
+		
 		model.addAttribute("photos", photoList);
+		model.addAttribute("tagSet", tagSet);
 		return "admin/photos/index";
 	}
 	

@@ -21,8 +21,13 @@
 				<input type="text" class="form-control" id="nameKeyword" name="nameKeyword" 
 					   placeholder="Inserisci nome">
 			</div>
+			<!-- Search Button -->
 			<div class="col-auto px-2">
 				<button type="submit" class="btn btn-dark col-auto">Search</button>
+			</div>
+			<!-- Reset Button -->
+			<div class="col-auto px-2">
+				<button class="btn btn-danger col-auto me-5" th:onclick="resetSearch(nameKeyword);">Reset</button>
 			</div>
 			
 			<!-- Insert a new photo -->
@@ -35,10 +40,8 @@
 				<select class="form-select" id="tagKeyword" onchange="filterByTag(this.options[this.selectedIndex].value);">
 <!-- 				<select class="form-select" id="tagKeyword" onchange="location.href = '/admin/photos';"> -->
 					<option value="" selected disabled>Filter by tag</option>
-					<option value="">All Tags</option>
-					<option value="Architecture">Architecture</option>
-					<option value="Nature">Nature</option>
-					<option value="Food">Food</option>
+					<option value="" class="allTags">All Tags</option>
+					<option th:each="tag : ${tagSet}" th:value="${tag}">[[${tag}]]</option>
 				</select>
 			</div>
 		</form>
@@ -88,14 +91,6 @@
 	
 	<!-- Scripts -->
 	<div th:replace="~{fragments :: scripts}"></div>
-	<script>
-		function filterByTag(tagKeyword) {
-			const URLParams = new URLSearchParams(window.location.search);
-			const nameKeyword = URLParams.get('nameKeyword');
-			console.log("nameKeyword: ", nameKeyword);
-			
-			location.href = '/admin/photos?nameKeyword='+nameKeyword+'&tagKeyword='+tagKeyword;
-		}
-	</script>
+	<script type="text/javascript" th:src="@{/scripts/admin/photo/index.js}"></script>
 </body>
 </html>
