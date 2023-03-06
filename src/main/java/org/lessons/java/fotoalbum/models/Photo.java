@@ -54,6 +54,8 @@ public class Photo {
 	@OrderBy("id DESC")
 	private List<Comment> comments;
 
+	private String categoriesToString;
+	
 	public Long getId() {
 		return id;
 	}
@@ -108,6 +110,14 @@ public class Photo {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+
+	public String getCategoriesToString() {
+		return categoriesToString;
+	}
+
+	public void setCategoriesToString(String categoriesToString) {
+		this.categoriesToString = categoriesToString;
 	}
 
 	public List<Comment> getComments() {

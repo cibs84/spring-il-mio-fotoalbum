@@ -67,7 +67,7 @@
 			      <td>[[${photo.title}]]</td>
 			      <td>[[${photo.description}]]</td>
 			      <td>[[${photo.tag}]]</td>
-			      <td>[[${photo.categories}]]</td>
+			      <td>[[${photo.categoriesToString}]]</td>
 			      <td><img th:src="@{${photo.url}}" width="100"></td>
 			      <!-- Actions -->
 			      <td class="td-actions" sec:authorize="hasAuthority('ADMIN')">

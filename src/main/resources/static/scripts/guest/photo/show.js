@@ -20,8 +20,6 @@ function showPhoto(id) {
         .get('http://localhost:8080/api/photos/' + id)
         .then((res) => {
             console.log('richiesta ok', res.data);
-            // res.data è una Photo
-			// populateHtml(res.data);
 
 			const photo = res.data;
 
@@ -42,20 +40,16 @@ function showPhoto(id) {
 		    document.querySelector('#photoUrl').alt = photo.title;
         })
         .catch((res) => {
-			alert("showPhoto(id): ERROR"); 
             console.error('errore nella richiesta: ', res);
         });
 }
 
 // SHOW COMMENTS
 function showComments(id) {
-	console.log('http://localhost:8080/api/photos/' + id);
     axios
         .get('http://localhost:8080/api/photos/' + id)
         .then((res) => {
             console.log('richiesta ok', res.data);
-            // res.data è una Photo
-			// populateHtml(res.data);
 
 			const photo = res.data;
 
@@ -83,7 +77,6 @@ function showComments(id) {
 		    });
         })
         .catch((res) => {
-			alert("showComments(id): ERROR"); 
             console.error('showComments(id) ERROR: ', res);
         });
 }
@@ -109,7 +102,7 @@ function addComment(photoId) {
 			
 			showComments(id);
 			
-			// Scroll show.html to comment list
+			// Scroll page show.html to comment list
 			const commentList = document.querySelector("#commentList");
 			commentList.scrollIntoView();
 		})
@@ -120,6 +113,7 @@ function addComment(photoId) {
 		
 }
 
+// SHOW VALIDATION ERRORS
 function showValidationErrors(errorList) {
     console.error("Errori di validazione: ", errorList);
 
@@ -130,6 +124,7 @@ function showValidationErrors(errorList) {
     })
 }
 
+// RESET VALIDATION ERRORS
 function resetValidationErrors() {
     document.querySelector("#validation_errors").innerHTML = '';
     // gets all html elements that have the id with the suffix _err

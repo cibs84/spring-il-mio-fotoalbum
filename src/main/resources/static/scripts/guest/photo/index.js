@@ -7,26 +7,18 @@ const tagList = [];
 function photoList(nameKeyword, tagKeyword = "") {
 	const nameKey = nameKeyword.value;
 	const tagKey = tagKeyword.value;
-	console.log("nameKeyword: ", nameKeyword);
-	console.log("tagKeyword: ", tagKeyword);
 	console.log("nameKey: ", nameKey);
 	console.log("tagKey: ", tagKey);
 	
-	
-	
     axios
-        .get('http://localhost:8080/api/photos?nameKeyword=' + nameKey + '&tagKeyword=' + tagKey) // method e endpoint
+        .get('http://localhost:8080/api/photos?nameKeyword=' + nameKey + '&tagKeyword=' + tagKey)
         .then((res) => {
-            // codice da eseguire se la richiesta è andata a buon fine
             console.log('Richiesta Ok: ', res);
-
-            // SE non ci sono photos
-            if (!res.data) {
-				console.log("IFFFFFFFFFFFFFFFFFFFFF");
+            
+            if (!res.data) {	// IF Photos not found
                 document.querySelector('#photos').classList.add("d-none");
                 document.querySelector('#no_photos').classList.remove("d-none");
             } else {
-				console.log("ELSEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 				document.querySelector('#photos').classList.remove("d-none");
                 document.querySelector('#no_photos').classList.add("d-none");
                 
@@ -86,11 +78,8 @@ function photoList(nameKeyword, tagKeyword = "") {
 					tagSelect.appendChild(window['optTag_'+index]);
 				})
             }
-
         })
         .catch((err) => {
-            // codice da eseguire se la richiesta non è andata a buon fine
             console.error('Errore nella richiesta: ', err);
-            alert("Erroreeee");
         })
 }

@@ -34,7 +34,7 @@ public class PhotoController {
 	public String index(
 			@RequestParam(name = "nameKeyword", required = false) String nameKeyword,
 			@RequestParam(name = "tagKeyword", required = false) String tagKeyword,
-			Model model) {	// GET /photos  OPPURE  /photos?nameKeyword=xxx
+			Model model) {
 		
 		List<Photo> photoList;
 		System.out.println("tagKeyword: " + tagKeyword);
@@ -52,6 +52,19 @@ public class PhotoController {
 		
 		for (Photo photo : photoList2) {
 			tagSet.add(photo.getTag());
+		}
+		
+		// Prepares categories to string
+		String categoriesToString = "";
+		for (Photo photo : photoList) {
+			categoriesToString = "";
+			
+			List<Category> categoryList = photo.getCategories();
+			for (Category category : categoryList) {
+				categoriesToString += category.toString() + ", ";
+			}
+			categoriesToString = categoriesToString.substring(0, categoriesToString.length() - 2);
+			photo.setCategoriesToString(categoriesToString);
 		}
 		
 		model.addAttribute("photos", photoList);
