@@ -2,26 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Edit Photo</title>
+<title>Edit Photo - [[${photo.title}]]</title>
 
 <th:block th:replace="~{fragments :: head}"></th:block>
 </head>
 <body>
 	<!-- HEADER -->
-	<!-- <header th:replace="~{fragments :: header}"></header> -->
+	<header th:replace="~{fragments :: header('photoEdit')}"></header>
 	
 	<!-- MAIN -->
 	<main class="container">
-	<!-- Heading -->
+		<!-- Heading -->
 		<div class="d-flex align-items-center">
-			<h1 class="mt-4 me-5">Edit Photo</h1>
+			<h1 class="mt-4 me-4">Edit Photo - [[${photo.title}]]</h1>
 			
 			<!-- ACTIONS -->
 			<div class="mt-4 d-inline-block">
-				<!-- Go to Photos -->
-		  		<a class="btn btn-outline-success" th:href="@{/admin/photos}">
-		  			Go to Photos &nbsp;<i class="fa fa-right-from-bracket"></i>
-	  			</a>
 		  		<!-- Delete -->
 		      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" method="post" class="d-inline-block">
 		      		<button type="submit" id="submitButton" class="btn btn-outline-danger">
@@ -83,18 +79,20 @@
 						th:for="|photo_${photo.id}|">Is Visible</label>
 		  	
 		  	<h4 class="mt-4">Categories</h4>
-			<div th:each="category : ${categories}" class="form-check">
-				<input type="checkbox" class="form-check-input" 
-						th:value="${category.id}" 
-						th:field="*{categories}"
-						th:checked="${photo.categories.contains(category)}" 
-						th:id="|category_${category.id}|">
-				<label class="form-check-label" th:text="${category.name}" 
-						th:for="|category_${category.id}|"></label>
+			<div>
+				<div th:each="category : ${categories}" class="form-check d-inline-block me-3 mb-3">
+					<input type="checkbox" class="form-check-input" 
+							th:value="${category.id}" 
+							th:field="*{categories}"
+							th:checked="${photo.categories.contains(category)}" 
+							th:id="|category_${category.id}|">
+					<label class="form-check-label" th:text="${category.name}" 
+							th:for="|category_${category.id}|"></label>
+				</div>
 			</div>
 			
-	  		<!-- Salva -->
-	  		<button type="submit" class="btn btn-primary mt-4 d-inline-block">Salva</button>
+	  		<!-- Button Save -->
+	  		<button type="submit" class="btn btn-primary mt-4 d-inline-block">Save</button>
 		</form>
 		
 		

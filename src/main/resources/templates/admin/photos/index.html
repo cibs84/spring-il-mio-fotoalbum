@@ -8,32 +8,38 @@
 </head>
 <body>
 	<!-- HEADER -->
-	<!-- <header th:replace="~{fragments :: header}"></header> -->
+	<header th:replace="~{fragments :: header('photoIndex')}"></header>
 	
 	<!-- MAIN -->
 	<main class="container">
 		<h1 class="text-center mb-5">Photos</h1>
 		
 		<!-- Search by name -->
-		<form action="photos" class="row my-5">
+		<form action="#" th:action="@{/admin/photos}" 
+			  class="row my-5" method="get">
 			<div class="col-auto px-0">
-				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Inserisci nome">
+				<input type="text" class="form-control" id="nameKeyword" name="nameKeyword" 
+					   placeholder="Inserisci nome">
 			</div>
 			<div class="col-auto px-2">
-				<button type="submit" class="btn btn-primary col-auto">Search</button>
+				<button type="submit" class="btn btn-dark col-auto">Search</button>
 			</div>
 			
 			<!-- Insert a new photo -->
 			<div class="col-auto px-2" sec:authorize="hasAuthority('ADMIN')">
-				<a href="/admin/photos/create" class="btn btn-success col-auto">Insert a new photo</a>
+				<a href="/admin/photos/create" class="btn btn-outline-dark col-auto">Insert a new photo</a>
 			</div>
 			
-			<!-- Go to Categories -->
+			<!-- Tag Select -->
 			<div class="col-auto ms-auto">
-				<a href="/admin/categories" class="d-inline-block btn btn-primary"
-				   sec:authorize="hasAuthority('ADMIN')">
-					Go to Categories
-				</a>
+				<select class="form-select" id="tagKeyword" onchange="filterByTag(this.options[this.selectedIndex].value);">
+<!-- 				<select class="form-select" id="tagKeyword" onchange="location.href = '/admin/photos';"> -->
+					<option value="" selected disabled>Filter by tag</option>
+					<option value="">All Tags</option>
+					<option value="Architecture">Architecture</option>
+					<option value="Nature">Nature</option>
+					<option value="Food">Food</option>
+				</select>
 			</div>
 		</form>
 		
@@ -62,18 +68,15 @@
 			      <td><img th:src="@{${photo.url}}" width="100"></td>
 			      <!-- Actions -->
 			      <td class="td-actions" sec:authorize="hasAuthority('ADMIN')">
-			      	<!-- Show -->
-					<a th:href="@{/admin/photos/{id} (id=${photo.id})}" class="btn btn-primary">
-		      			<i class="fa-solid fa-sheet-plastic"></i>
-		      		</a>
 			      	<!-- Edit -->
-					<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" class="btn btn-success">
+					<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" 
+					   class="btn btn-outline-success me-2">
 		      			<i class="fa-regular fa-pen-to-square"></i>
 		      		</a>
 		      		<!-- Delete -->
 			      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" 
 			      		  method="post" class="d-inline-block">
-			      		<button type="submit" id="submitButton" class="btn btn-danger">
+			      		<button type="submit" id="submitButton" class="btn btn-outline-danger">
 			      			<i class="fa fa-trash-alt"></i>
 			      		</button>
 			      	</form>
@@ -85,5 +88,14 @@
 	
 	<!-- Scripts -->
 	<div th:replace="~{fragments :: scripts}"></div>
+	<script>
+		function filterByTag(tagKeyword) {
+			const URLParams = new URLSearchParams(window.location.search);
+			const nameKeyword = URLParams.get('nameKeyword');
+			console.log("nameKeyword: ", nameKeyword);
+			
+			location.href = '/admin/photos?nameKeyword='+nameKeyword+'&tagKeyword='+tagKeyword;
+		}
+	</script>
 </body>
 </html>

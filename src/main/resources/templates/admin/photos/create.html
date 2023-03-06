@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- HEADER -->
-	<!-- <header th:replace="~{fragments :: header}"></header> -->
+	<header th:replace="~{fragments :: header('createPhoto')}"></header>
 	
 	<!-- MAIN -->
 	<main class="container">
@@ -64,8 +64,8 @@
 				<label class="form-check-label" 
 						th:for="|photo_${photo.id}|">Is Visible</label>
 		  	
-		  	<h4>Categories</h4>
-			<div th:each="category : ${categories}">
+		  	<h4 class="mb-3">Categories</h4>
+			<div th:each="category : ${categories}" class="form-check d-inline-block me-3 mb-2">
 				<input type="checkbox" class="form-check-input" th:value="${category.id}" 
 				th:field="${photo.categories}" th:id="|category_${category.id}|">
 				<label class="form-check-label" th:text="${category.name}" 
@@ -73,7 +73,7 @@
 			</div>
 		  	
 		  	<!-- Button Crea -->
-		  	<button type="submit" class="btn btn-primary btn-insert">Insert</button>
+		  	<button type="submit" class="btn btn-primary btn-insert d-block">Insert</button>
 		</form>
 	</main>
 

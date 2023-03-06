@@ -30,16 +30,18 @@ public class PhotoRestController {
 	PhotoRepository photoRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Photo>> index(@RequestParam(name = "keyword", required = false) String keyword) {
+	public ResponseEntity<List<Photo>> index(@RequestParam(name = "nameKeyword", required = false) String nameKeyword,
+											 @RequestParam(name = "tagKeyword", required = false) String tagKeyword) {
 		
 		List<Photo> photoList;
 		
-		if (keyword!=null && !keyword.isEmpty()) {
-			photoList = photoRepository.findByTitleLike(keyword + "%");
+		if (tagKeyword!=null && !tagKeyword.isEmpty()) {
+			photoList = photoRepository.myFindByTitleAndTagLike(nameKeyword+'%', tagKeyword);
 		} else {
-			photoList = photoRepository.findAll();
-//			photoList = photoRepository.findAll(Sort.by("name"));
+			photoList = photoRepository.myFindByTitleLike(nameKeyword+'%');
 		}
+		
+		
 		
 		if (photoList.size() == 0) {
 			return new ResponseEntity<List<Photo>>(HttpStatus.NO_CONTENT);

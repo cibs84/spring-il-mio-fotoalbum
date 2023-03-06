@@ -22,19 +22,34 @@
 		<h1 class="text-center mb-5">Photos</h1>
 		
 		<!-- Search by name -->
-		<form action="photos" class="row my-5">
+		<form id="photoIndexForm" class="row my-5" 
+			  onsubmit="event.preventDefault(); photoList(nameKeyword, tagKeyword)">
 			<div class="col-auto px-0">
-				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Name">
+				<input type="text" class="form-control" id="nameKeyword" 
+					   name="keyword" placeholder="Name">
 			</div>
 			<div class="col-auto px-2">
 				<button type="submit" class="btn btn-primary col-auto">Search</button>
+			</div>
+			
+			<!-- Tag Select -->
+			<div class="col-auto ms-auto">
+				<select class="form-select" id="tagKeyword" onchange="photoList(nameKeyword, tagKeyword)">
+					<!-- 
+					<option value="" selected disabled>Filter by tag</option>
+					<option value="">All Tags</option>
+					<option value="Architecture">Architecture</option>
+					<option value="Nature">Nature</option>
+					<option value="Food">Food</option>
+					 -->
+				</select>
 			</div>
 		</form>
 		
 		<!-- IF No photos available -->
 		<h2 id="no_photos" class="text-center my-5">No photos available</h2>
 		<!-- ELSE: Photo List -->
-		<table id="photos" class="table table-hover align-middle w-auto">
+		<table id="photos" class="table table-hover align-middle">
 			<thead>
 			    <tr>
 			      <th scope="col">#</th>

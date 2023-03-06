@@ -19,13 +19,26 @@
 	</th:block>
 	
 	<!-- Header -->
-	<header class="container" th:fragment="header">
-		<div class="row justify-content-end">
-			<div class="col-auto">
-				<div class="header-right fs-4 py-3">
-					<span class="fs-4" sec:authentication="name"></span> 
-					<span sec:authentication="principal.authorities"></span> |  
-					<a href="/logout">Esci</a>
+	<header th:fragment="header(namePage)">
+		<div class="container">
+			<div class="row justify-content-between align-items-center">
+				<nav class="col-auto">
+					<!-- Photos -->
+					<a th:if="${namePage != 'photoIndex'}" th:href="@{/admin/photos}" class="d-inline-block me-3">
+						Photos 
+					</a>
+<!-- 					 <span th:if="${namePage != 'photoIndex'} OR ${namePage != 'categoryIndex'}"> | </span>  -->
+					<a th:if="${namePage != 'categoryIndex'}" href="/admin/categories" class="d-inline-block"
+					   sec:authorize="hasAuthority('ADMIN')">
+						Categories
+					</a>
+				</nav>
+				<div class="col-auto">
+					<div class="header-right fs-4 py-1">
+						<span class="fs-4" sec:authentication="name"></span> 
+						<span sec:authentication="principal.authorities"></span> |  
+						<a href="/logout">Esci</a>
+					</div>
 				</div>
 			</div>
 		</div>

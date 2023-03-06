@@ -1,6 +1,17 @@
 /* HEADER */
 header {
-	padding: 2rem 0;
-/* 	background: lightblue; */
-	background: $indigo;
+	background: black;
+	color: #f1f1f1;
+	font-size: 1.3rem;
+	
+	a {
+		margin: 1rem 0;
+		&:hover {
+			color: white;
+		} 
+	}
+	
+	.header-right {
+		
+	}
 }

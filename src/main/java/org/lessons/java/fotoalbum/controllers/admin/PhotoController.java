@@ -8,7 +8,6 @@ import org.lessons.java.fotoalbum.models.Photo;
 import org.lessons.java.fotoalbum.repositories.CategoryRepository;
 import org.lessons.java.fotoalbum.repositories.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,15 +31,18 @@ public class PhotoController {
 	
 	@GetMapping()
 	public String index(
-			@RequestParam(name = "keyword", required = false) String keyword, 
-			Model model) {	// GET /photos  OPPURE  /photos?keyword=xxx
+			@RequestParam(name = "nameKeyword", required = false) String nameKeyword,
+			@RequestParam(name = "tagKeyword", required = false) String tagKeyword,
+			Model model) {	// GET /photos  OPPURE  /photos?nameKeyword=xxx
 		
 		List<Photo> photoList;
-		
-		if (keyword!=null && !keyword.isEmpty()) {
-			photoList = photoRepository.findByTitleLike(keyword + "%");
+		System.out.println("tagKeyword: " + tagKeyword);
+		if (tagKeyword!=null && !tagKeyword.isEmpty()) {
+			photoList = photoRepository.myFindByTitleAndTagLike(nameKeyword+'%', tagKeyword);
+		} else if (nameKeyword!=null && !nameKeyword.isEmpty()) {
+			photoList = photoRepository.myFindByTitleLike(nameKeyword+'%');
 		} else {
-			photoList = photoRepository.findAll(Sort.by("title"));
+			photoList = photoRepository.findAll();
 		}
 		
 		model.addAttribute("photos", photoList);

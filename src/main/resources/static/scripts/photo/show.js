@@ -131,7 +131,6 @@ function populateHtml(photo) {
 }
 
 function addComment(photoId) {
-	//	e.preventDefault(); 
 	const id = photoId.innerText;
 	console.log("photoId: ", id);
 
@@ -144,13 +143,13 @@ function addComment(photoId) {
 		})
 		.then(res => {
 			console.log("Insert Comment OK: ", res);
+			resetValidationErrors();
 			showComments(id);
 		})
 		.catch(res => {
 			console.error("Insert Comment ERROR: ", res);
 			showValidationErrors(res.response.data.errors);
 			alert("Insert Comment ERROR");
-			//window.location.href = "./photos/"+id+'?'+phtoId;
 		})
 		
 }
@@ -167,7 +166,8 @@ function showValidationErrors(errorList) {
 
 function resetValidationErrors() {
     document.querySelector("#validation_errors").innerHTML = '';
-    document.querySelectorAll("[id$=_err]").forEach(element => { // prende tutti gli elementi html con id che finisce con _err
+    // gets all html elements that have the id with the suffix _err
+    document.querySelectorAll("[id$=_err]").forEach(element => { 
         element.innerHTML = "";
     });
 }
