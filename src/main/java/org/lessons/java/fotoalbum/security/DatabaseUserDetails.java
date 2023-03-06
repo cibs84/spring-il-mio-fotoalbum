@@ -1,4 +1,3 @@
-/*
 package org.lessons.java.fotoalbum.security;
 
 import java.util.Collection;
@@ -63,4 +62,3 @@ public class DatabaseUserDetails implements UserDetails {
 		return true;
 	}
 }
-*/

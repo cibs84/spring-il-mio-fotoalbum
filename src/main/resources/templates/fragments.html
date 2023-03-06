@@ -23,14 +23,18 @@
 		<div class="container">
 			<div class="row justify-content-between align-items-center">
 				<nav class="col-auto">
+					<span>Dashboard: </span>
 					<!-- Photos -->
 					<a th:if="${namePage != 'photoIndex'}" th:href="@{/admin/photos}" class="d-inline-block me-3">
 						Photos 
 					</a>
-<!-- 					 <span th:if="${namePage != 'photoIndex'} OR ${namePage != 'categoryIndex'}"> | </span>  -->
-					<a th:if="${namePage != 'categoryIndex'}" href="/admin/categories" class="d-inline-block"
-					   sec:authorize="hasAuthority('ADMIN')">
+					<a th:if="${namePage != 'categoryIndex'}" href="/admin/categories" class="d-inline-block">
 						Categories
+					</a>
+				</nav>
+				<nav class="col-auto">
+					<a href="/" class="d-inline-block mx-auto">
+						Home <i class="fa-solid fa-house-chimney"></i>
 					</a>
 				</nav>
 				<div class="col-auto">

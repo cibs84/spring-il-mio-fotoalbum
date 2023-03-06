@@ -1,4 +1,3 @@
-/*
 package org.lessons.java.fotoalbum.security;
 
 import java.util.Optional;
@@ -27,4 +26,3 @@ public class DatabaseUserDetailsService implements UserDetailsService {
     }
 
 }
-*/

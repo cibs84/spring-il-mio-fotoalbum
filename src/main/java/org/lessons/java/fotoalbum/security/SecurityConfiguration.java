@@ -1,4 +1,3 @@
-/*
 package org.lessons.java.fotoalbum.security;
 
 import org.springframework.context.annotation.Bean;
@@ -22,23 +21,25 @@ public class SecurityConfiguration {
 		System.out.println(passwordEncoder().encode("user"));
 		
 		http.authorizeHttpRequests()
-			.requestMatchers("/admin/photos/create", "/admin/photos/edit/**").hasAuthority("ADMIN")	//per creare o modificare una pizza bisogna essere ADMIN
-			.requestMatchers(HttpMethod.POST, "/admin/photos/delete/**").hasAuthority("ADMIN")	//per fare il POST su /photos/delete/{id} (richiesto per eliminare una pizza) bisogna essere ADMIN
-			.requestMatchers("/admin/categories", "/admin/categories/**").hasAuthority("ADMIN")	//per accedere agli categories bisogna essere ADMIN
-			.requestMatchers("/admin/photos", "/admin/photos/**").hasAnyAuthority("USER","ADMIN")		//per accedere all'elenco pizza (/photos) o dettaglio pizza (/photos/{id}) bisogna esser USER o ADMIN
+//			.requestMatchers("/admin/photos/create", "/admin/photos/edit/**").hasAuthority("ADMIN")
+//			.requestMatchers(HttpMethod.POST, "/admin/photos/delete/**").hasAuthority("ADMIN")
+//			.requestMatchers("/admin/categories", "/admin/categories/**").hasAuthority("ADMIN")
+//			.requestMatchers("/admin/photos", "/admin/photos/**").hasAnyAuthority("USER","ADMIN")
 			.requestMatchers("/admin/**").hasAnyAuthority("USER","ADMIN")		
-			.requestMatchers("/**").permitAll()	//chiunque può accedere alla Home
-			.and().formLogin()	//abilita il supporto al form login (auto generato)
+			.requestMatchers("/**").permitAll()
+			.and()
+		    .csrf()
+		    .ignoringRequestMatchers(request ->
+		    	request.getRequestURI().startsWith("/api") && // use .equals instead of .startsWith to indicate a specific URI
+		    	request.getMethod().equals("POST"))
+		    .ignoringRequestMatchers(request ->
+				request.getRequestURI().startsWith("/api") &&
+				request.getMethod().equals("DELETE"))
+			.and().formLogin()
+			.defaultSuccessUrl("/admin/photos", true) // redirect after success login
 	        .and().logout()		//abilita il supporto al form logout (auto generato)
 	    	.and().exceptionHandling()
 	    	.accessDeniedPage("/access-denied.html"); //pagina personalizzata in caso di accesso negato
-		
-		http.authorizeHttpRequests()
-		.requestMatchers(HttpMethod.POST, "/api/photos/create").permitAll()	//chiunque può accedere alla Home
-		.requestMatchers("/**").permitAll()	//chiunque può accedere alla Home
-		.and().exceptionHandling()
-		.accessDeniedPage("/access-denied.html"); //pagina personalizzata in caso di accesso negato
-		
 		return http.build();	
 	}
 	
@@ -62,4 +63,3 @@ public class SecurityConfiguration {
 	    return authProvider;
 	}  
 }
-*/
