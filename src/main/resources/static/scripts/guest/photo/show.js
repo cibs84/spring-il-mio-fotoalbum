@@ -37,6 +37,7 @@ function showPhoto(id) {
 		    document.querySelector('#photoDescription').innerHTML = photo.description;
 		
 		    document.querySelector('#photoUrl').src = photo.url;
+		    document.querySelector('#modalPhotoUrl').src = photo.url;
 		    document.querySelector('#photoUrl').alt = photo.title;
         })
         .catch((res) => {

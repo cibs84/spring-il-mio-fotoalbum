@@ -3,10 +3,13 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	color: green;
 }
 
 /* COMMONS */
+a {
+	color: inherit;
+	text-decoration: none;
+}
 .ms_container {
 	width: 50%;
 	margin: 0 auto;
@@ -14,4 +17,8 @@
 }
 body {
 	background: #fafafa;
+	font-family: helvetica,arial,sans-serif;
+}
+h1 {
+	margin: 3rem 0;
 }

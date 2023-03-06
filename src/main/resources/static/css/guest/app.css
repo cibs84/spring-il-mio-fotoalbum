@@ -12,10 +12,14 @@ sass --watch src/main/resources/sass/guest/app.scss:src/main/resources/static/cs
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: green;
 }
 
 /* COMMONS */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .ms_container {
   width: 50%;
   margin: 0 auto;
@@ -24,17 +28,33 @@ sass --watch src/main/resources/sass/guest/app.scss:src/main/resources/static/cs
 
 body {
   background: #fafafa;
+  font-family: helvetica, arial, sans-serif;
+}
+
+h1 {
+  margin: 3rem 0;
 }
 
 /* PARTIALS */
 /* HEADER */
 header {
-  padding: 2rem 0;
-  /* 	background: lightblue; */
-  background: #6574cd;
+  padding: 0.5rem 0;
+  background: black;
+  color: white;
+}
+header a {
+  font-size: 1.5rem;
+  color: rgb(241, 241, 241);
+}
+header a:hover {
+  color: white;
 }
 
 /* PARTIALS - Photos */
+h1 {
+  margin-bottom: 1.5rem;
+}
+
 table img {
   width: 10rem;
 }
@@ -42,23 +62,40 @@ table .td-actions {
   min-width: 10rem;
 }
 
-/* PARTIALS - Photos !!!!!!!!!!!!!!!!!! */
-* {
-  color: red !important;
+/* PARTIALS - Photos */
+.card-body p {
+  font-size: 1.25rem;
+}
+.card-body .authorComment {
+  font-size: 1.2rem;
 }
 
-.authorComment {
-  color: #3c3c3c;
-  font-size: 14px;
-  font-weight: bold;
-  color: red;
+.photoCard img {
+  width: 100%;
+  height: 100%;
 }
-
-.contentComment {
-  color: #484848;
-  font-size: 15px;
-  line-height: 22px;
-  color: red;
+.photoCard .btn {
+  background: rgba(0, 0, 0, 0.6117647059);
+  color: white;
+  transition: 0.3s;
+}
+.photoCard .btn:hover {
+  border-color: white;
+}
+.photoCard .card-img-overlay {
+  padding: 6rem;
+  display: flex;
+  align-items: center;
+  cursor: zoom-in;
+}
+.photoCard .modal img {
+  max-width: 100%;
+}
+.photoCard .modal .modal-dialog {
+  max-width: fit-content;
+}
+.photoCard .modal.fade.show {
+  cursor: zoom-out;
 }
 
 input {
