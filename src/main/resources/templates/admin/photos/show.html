@@ -52,7 +52,7 @@
 					<span id="photoTag" class="px-2">[[${photo.tag}]]</span> | 
 					<span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span>
 					<span th:if="${photo.categories.size()<=0}" id="photoCategories">None</span>
-					<span th:if="${photo.categories.size()>0}" id="photoCategories">[[${photo.categories}]]</span>
+					<span th:if="${photo.categories.size()>0}" id="photoCategories">[[${photo.getCategoriesToString()}]]</span>
 				</div>
 		  	</div>
 		  </div>

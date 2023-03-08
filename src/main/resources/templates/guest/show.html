@@ -33,17 +33,37 @@
 		</div>
 	</header>
 	
-	<!-- HEADER -->
+	<!-- MAIN -->
 	<main class="container">
 		
 		<h1 id="photoTitle" class="text-center"></h1>
 		<div class="row justify-content-between">
 			<div class="ms-auto col-8">
-				<!-- Photo -->
-				<img id="photoUrl" class="mb-3" width="100%">
+				
+		 		
+		 		<!-- ******************************** -->
+
+				<!-- Button trigger modal -->
+				<button type="button" id="btnModal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				  	<!-- Photo -->
+					<img id="photoUrl">
+				</button>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered">
+					<!-- Photo Full Screen-->
+					<img id="modalPhotoUrl">
+				  </div>
+				</div>
+			
+				<!-- ******************************** -->
+		 		
 		 		
 		 		<!-- Tag and Categories -->
-		 		<span class="fw-semibold text-decoration-underline d-inline-block">Tag: </span><span id="photoTag" class="px-2"></span> | <span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span><span id="photoCategories"></span>
+		 		<div>
+			 		<span class="fw-semibold text-decoration-underline d-inline-block">Tag: </span><span id="photoTag" class="px-2"></span> | <span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span><span id="photoCategories"></span>
+		 		</div>
 			</div>
 			<div class="col-4">
 				<h4 class="mb-3 mt-0">Leave a comment</h4>

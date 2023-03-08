@@ -15,6 +15,11 @@ sass --watch src/main/resources/sass/guest/app.scss:src/main/resources/static/cs
 }
 
 /* COMMONS */
+html, body, main {
+  height: 100%;
+  margin: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -63,38 +68,27 @@ table .td-actions {
 }
 
 /* PARTIALS - Photos */
-.card-body p {
-  font-size: 1.25rem;
+#btnModal {
+  border: none;
+  margin-bottom: 0.5rem;
 }
-.card-body .authorComment {
-  font-size: 1.2rem;
-}
-
-.photoCard img {
-  width: 100%;
-  height: 100%;
-}
-.photoCard .btn {
-  background: rgba(0, 0, 0, 0.6117647059);
-  color: white;
-  transition: 0.3s;
-}
-.photoCard .btn:hover {
-  border-color: white;
-}
-.photoCard .card-img-overlay {
-  padding: 6rem;
-  display: flex;
-  align-items: center;
+#btnModal:hover {
   cursor: zoom-in;
 }
-.photoCard .modal img {
-  max-width: 100%;
+
+#photoUrl {
+  width: 100%;
 }
-.photoCard .modal .modal-dialog {
-  max-width: fit-content;
+.modal .modal-dialog {
+  height: 100%;
+  margin: 0 auto;
+  justify-content: center;
 }
-.photoCard .modal.fade.show {
+.modal .modal-dialog img {
+  margin: 0 auto;
+  max-height: 100%;
+}
+.modal.fade.show {
   cursor: zoom-out;
 }
 

@@ -8,6 +8,7 @@ import org.lessons.java.fotoalbum.models.Category;
 import org.lessons.java.fotoalbum.models.Photo;
 import org.lessons.java.fotoalbum.repositories.CategoryRepository;
 import org.lessons.java.fotoalbum.repositories.PhotoRepository;
+import org.lessons.java.fotoalbum.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,10 @@ public class PhotoController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
+	@Autowired
+	private PhotoService photoService;
+	
+	// INDEX
 	@GetMapping()
 	public String index(
 			@RequestParam(name = "nameKeyword", required = false) String nameKeyword,
@@ -55,16 +60,8 @@ public class PhotoController {
 		}
 		
 		// Prepares categories to string
-		String categoriesToString = "";
 		for (Photo photo : photoList) {
-			categoriesToString = "";
-			
-			List<Category> categoryList = photo.getCategories();
-			for (Category category : categoryList) {
-				categoriesToString += category.toString() + ", ";
-			}
-			categoriesToString = categoriesToString.substring(0, categoriesToString.length() - 2);
-			photo.setCategoriesToString(categoriesToString);
+			photoService.setPhotoCategoriesToString(photo);
 		}
 		
 		model.addAttribute("photos", photoList);
@@ -72,6 +69,7 @@ public class PhotoController {
 		return "admin/photos/index";
 	}
 	
+	// SHOW
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		
@@ -79,13 +77,13 @@ public class PhotoController {
 		if (photo.isEmpty()) {
 			return "redirect:/error";
 		}
-		Photo photo2 = photo.get();
-		
-		model.addAttribute("photo", photo2);
+		photoService.setPhotoCategoriesToString(photo.get());
+		model.addAttribute("photo", photo.get());
 		
 		return "admin/photos/show";
 	}
 	
+	// CREATE
 	@GetMapping("/create")
 	public String create(Model model) {
 		Photo photo = new Photo();
@@ -99,6 +97,7 @@ public class PhotoController {
 		return "admin/photos/create";
 	}
 	
+	// STORE
 	@PostMapping("/store")
 	public String store(
 			@Valid @ModelAttribute("photo") Photo formPhoto,
@@ -115,6 +114,7 @@ public class PhotoController {
 		return "redirect:/admin/photos";
 	}
 	
+	// EDIT
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		Photo photo = photoRepository.getReferenceById(id);
@@ -126,6 +126,7 @@ public class PhotoController {
 		return "admin/photos/edit";
 	}
 	
+	// UPDATE
 	@PostMapping("/update/{id}")
 	public String update(
 			@Valid @ModelAttribute Photo formPhoto,
@@ -143,6 +144,7 @@ public class PhotoController {
 		return "redirect:/admin/photos/" + formPhoto.getId();
 	}
 	
+	// DELETE
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Long id) {
 		
