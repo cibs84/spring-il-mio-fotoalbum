@@ -45,7 +45,7 @@ public class CommentRestController {
 		}
 	}
 	
-	// Return Photo instance with updated comment list 
+	// Creates a new comment and return Photo instance with updated comment list 
 	@PostMapping("/photos/{photoId}/create")	// CREATE
 	public ResponseEntity<Comment> create(@Valid @RequestBody Comment comment,
 			@PathVariable(name = "photoId") Long photoId) {

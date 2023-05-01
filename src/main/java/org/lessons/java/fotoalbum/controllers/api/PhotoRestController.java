@@ -7,6 +7,7 @@ import org.lessons.java.fotoalbum.models.Photo;
 import org.lessons.java.fotoalbum.repositories.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,16 +30,20 @@ public class PhotoRestController {
 	@Autowired
 	PhotoRepository photoRepository;
 	
-	@GetMapping
+	// produces enable a xml or json response otherwise the response will be in a json media type (default behaviour)
+	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<Photo>> index(@RequestParam(name = "nameKeyword", required = false) String nameKeyword,
 											 @RequestParam(name = "tagKeyword", required = false) String tagKeyword) {
 		
 		List<Photo> photoList;
 		
-		if (tagKeyword!=null && !tagKeyword.isEmpty()) {
+		if (tagKeyword!=null && !tagKeyword.isEmpty() 
+			&& nameKeyword!=null && !nameKeyword.isEmpty()) {
 			photoList = photoRepository.myFindByTitleAndTagLike(nameKeyword+'%', tagKeyword);
-		} else {
+		} else if (nameKeyword!=null && !nameKeyword.isEmpty()) {
 			photoList = photoRepository.myFindByTitleLike(nameKeyword+'%');
+		} else {
+			photoList = photoRepository.findAll();
 		}
 		
 		
