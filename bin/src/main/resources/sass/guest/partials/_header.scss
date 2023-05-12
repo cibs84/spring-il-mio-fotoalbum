@@ -1,0 +1,15 @@
+/* HEADER */
+header {
+	padding: 0.5rem 0;
+	background: black;
+	color: white;
+	
+	a {
+		font-size: 1.5rem;
+		color: rgb(241 241 241);
+		
+		&:hover{
+			color: white;
+		}
+	}
+}

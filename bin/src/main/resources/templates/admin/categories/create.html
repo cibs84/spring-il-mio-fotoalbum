@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert a new Category</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<header th:replace="~{fragments :: header('categoryCreate')}"></header>
+	
+	<!-- MAIN -->
+	<main class="container">
+		<h1 class="mt-4">Insert a new Category</h1>
+		
+		<!--  Form: Insert a new Category -->
+		<form id="category-form" th:object="${category}" th:action="@{/admin/categories/store}" method="post">
+			<!--  Name -->
+	    	<label for="name" class="form-label">Name</label>
+	    	<input type="text" maxlength="30" th:field="*{name}" class="form-control" id="name" th:errorClass="is-invalid">
+			<!-- Validation Error -->
+		  	<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+				<ul>
+					<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+				</ul>
+			</div>
+		  	
+		  	<!-- Button Insert -->
+		  	<button type="submit" class="btn btn-dark mt-3">Insert</button>
+		</form>
+	</main>
+
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>

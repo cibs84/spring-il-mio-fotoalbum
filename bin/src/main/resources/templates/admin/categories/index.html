@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Categories</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<header th:replace="~{fragments :: header('categoryIndex')}"></header>
+	
+	<!-- MAIN -->
+	<main class="container">
+	
+		<h1 class="text-center">Categories</h1>
+		
+		
+		<!-- IF the Categories are not found -->
+		<h2 class="text-center my-5" th:unless="${categories.size() > 0}">Categories not found</h2>
+		
+		<!-- Insert a new Category -->
+		<div class="col-auto px-2">
+			<a href="categories/create" class="btn btn-dark col-auto mb-3">Insert a new Category</a>
+		</div>
+		
+		<!-- ELSE: Category List -->
+		<table th:if="${categories.size() > 0}" class="table table-hover align-middle">
+			<thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Name</th>
+			      <th scope="col" class="w-25">Actions</th>
+			    </tr>
+	  		</thead>
+		  	<tbody>
+			    <tr th:each="category : ${categories}">
+			      <th>[[${category.id}]]</th>
+			      <td>[[${category.name}]]</td>
+			      <!-- ACTIONS -->
+			      <td>
+			      	<!-- Edit -->
+					<a th:href="@{/admin/categories/edit/{id} (id=${category.id})}" 
+					   class="btn btn-outline-success me-2">
+		      			<i class="fa-regular fa-pen-to-square"></i>
+		      		</a>
+		      		<!-- Delete -->
+			      	<form action="#" th:action="@{/admin/categories/delete/{id}(id=${category.id})}" method="post" class="d-inline-block">
+			      		<button type="submit" id="submitButton" class="btn btn-outline-danger">
+			      			<i class="fa fa-trash-alt"></i>
+			      		</button>
+			      	</form>
+			      </td>
+			    </tr>
+		  	</tbody>
+		</table>
+	</main>
+	
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>

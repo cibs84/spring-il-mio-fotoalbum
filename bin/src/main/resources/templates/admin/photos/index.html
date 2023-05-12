@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Photos</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<header th:replace="~{fragments :: header('photoIndex')}"></header>
+	
+	<!-- MAIN -->
+	<main class="container">
+		<h1 class="text-center mb-5">Photos</h1>
+		
+		<!-- Search by name -->
+		<form action="#" th:action="@{/admin/photos}" 
+			  class="row my-5" method="get">
+			<div class="col-auto px-0">
+				<input type="text" class="form-control" id="nameKeyword" name="nameKeyword" 
+					   placeholder="Inserisci nome">
+			</div>
+			<!-- Search Button -->
+			<div class="col-auto px-2">
+				<button type="submit" class="btn btn-dark col-auto">Search</button>
+			</div>
+			<!-- Reset Button -->
+			<div class="col-auto px-2">
+				<button class="btn btn-danger col-auto me-5" th:onclick="resetSearch(nameKeyword);">Reset</button>
+			</div>
+			
+			<!-- Insert a new photo -->
+			<div class="col-auto px-2" sec:authorize="hasAuthority('ADMIN')">
+				<a href="/admin/photos/create" class="btn btn-outline-dark col-auto">Insert a new photo</a>
+			</div>
+			
+			<!-- Tag Select -->
+			<div class="col-auto ms-auto">
+				<select class="form-select" id="tagKeyword" onchange="filterByTag(this.options[this.selectedIndex].value);">
+<!-- 				<select class="form-select" id="tagKeyword" onchange="location.href = '/admin/photos';"> -->
+					<option value="" selected disabled>Filter by tag</option>
+					<option value="" class="allTags">All Tags</option>
+					<option th:each="tag : ${tagSet}" th:value="${tag}">[[${tag}]]</option>
+				</select>
+			</div>
+		</form>
+		
+		<!-- IF No photos available -->
+		<h2 class="text-center my-5" th:unless="${photos.size() > 0}">No photos available</h2>
+		<!-- ELSE: Photo List -->
+		<table th:if="${photos.size() > 0}" class="table table-hover align-middle w-auto">
+			<thead>
+			    <tr>
+			      <th scope="col" sec:authorize="hasAuthority('ADMIN')">#</th>
+			      <th scope="col">Title</th>
+			      <th scope="col">Description</th>
+			      <th scope="col">Tag</th>
+			      <th scope="col">Categories</th>
+			      <th scope="col">Photo</th>
+			      <th scope="col" sec:authorize="hasAuthority('ADMIN')">Actions</th>
+			    </tr>
+	  		</thead>
+		  	<tbody>
+			    <tr th:each="photo : ${photos}" th:onclick="|window.location='/admin/photos/${photo.id}';|" style="cursor:pointer;">
+			      <th sec:authorize="hasAuthority('ADMIN')">[[${photo.id}]]</th>
+			      <td>[[${photo.title}]]</td>
+			      <td>[[${photo.description}]]</td>
+			      <td>[[${photo.tag}]]</td>
+			      <td>[[${photo.categoriesToString}]]</td>
+			      <td><img th:src="@{${photo.url}}" width="100"></td>
+			      <!-- Actions -->
+			      <td class="td-actions" sec:authorize="hasAuthority('ADMIN')">
+			      	<!-- Edit -->
+					<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" 
+					   class="btn btn-outline-success me-2">
+		      			<i class="fa-regular fa-pen-to-square"></i>
+		      		</a>
+		      		<!-- Delete -->
+			      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" 
+			      		  method="post" class="d-inline-block">
+			      		<button type="submit" id="submitButton" class="btn btn-outline-danger">
+			      			<i class="fa fa-trash-alt"></i>
+			      		</button>
+			      	</form>
+			      </td>
+			    </tr>
+		  	</tbody>
+		</table>
+	</main>
+	
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+	<script type="text/javascript" th:src="@{/scripts/admin/photo/index.js}"></script>
+</body>
+</html>

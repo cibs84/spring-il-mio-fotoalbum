@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Photo</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<!-- HEADER -->
+	<header th:replace="~{fragments :: header('photoShow')}"></header>
+	
+	<!-- MAIN -->
+	<main class="container">
+		<!-- Title -->
+		<h1 th:text="${photo.title}" class="text-center mb-5"></h1>
+		<!-- Photo Card -->
+		<div class="card photoCard text-bg-dark">
+		  <img th:alt="${photo.title}" th:src="@{${photo.url}}" class="card-img">
+		  <div class="card-img-overlay" data-bs-toggle="modal" data-bs-target="#exampleModal">
+		  	<!-- Actions -->
+		  	<div class="actions">
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered">
+				    
+				    <img th:alt="${photo.title}" th:src="@{${photo.url}}" class="card-img" width="100%">
+
+				  </div>
+				</div>
+				
+		  		<!-- Edit -->
+				<a th:href="@{/admin/photos/edit/{id} (id=${photo.id})}" class="btn"
+				   sec:authorize="hasAuthority('ADMIN')">
+		   			Edit <i class="fa fa-pen-to-square"></i>
+		   		</a>
+		   		<!-- Delete -->
+		      	<form action="#" th:action="@{/admin/photos/delete/{id}(id=${photo.id})}" 
+		      		  method="post" class="d-inline-block" sec:authorize="hasAuthority('ADMIN')">
+		      		<button type="submit" id="submitButton" class="btn">
+		      			Delete <i class="fa fa-trash-alt"></i>
+		      		</button>
+		      	</form>
+		  	</div>
+		  	<div class="ms_container_caption">
+		  		<!-- Description -->
+			    <h5 class="card-title">Description</h5>
+			    <p class="card-text">[[${photo.description}]]</p>
+			    <!-- Tag and Categories -->
+				<div class="mb-3 tagCategories card-text">
+					<span class="fw-semibold text-decoration-underline d-inline-block">Tag: </span>
+					<span id="photoTag" class="px-2">[[${photo.tag}]]</span> | 
+					<span class="fw-semibold text-decoration-underline d-inline-block px-2">Categories: </span>
+					<span th:if="${photo.categories.size()<=0}" id="photoCategories">None</span>
+					<span th:if="${photo.categories.size()>0}" id="photoCategories">[[${photo.getCategoriesToString()}]]</span>
+				</div>
+		  	</div>
+		  </div>
+		</div>
+	</main>
+	
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>

@@ -3,13 +3,12 @@ package org.lessons.java.fotoalbum.models;
 import java.util.List;
 import java.util.Objects;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,8 +47,7 @@ public class Category {
 	}
 
 	@JsonBackReference
-	@ManyToMany(mappedBy="categories")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToMany(mappedBy="categories", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Photo> photos;
 
 	@Override
